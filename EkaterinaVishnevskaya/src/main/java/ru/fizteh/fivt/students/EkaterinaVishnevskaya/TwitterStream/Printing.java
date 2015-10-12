@@ -16,7 +16,7 @@ public class Printing {
     private static final  String RTColor = "\u001B[31m";
 
     public static void printName(PrintStream out, String name) throws IOException {
-        out.print(NameColor + "@" + name + StandartColor + ":");
+        out.print(NameColor + "@" + name + StandartColor + ": ");
     }
 
     public static void printTweet(PrintStream out, Status tweet, boolean time) throws IOException{

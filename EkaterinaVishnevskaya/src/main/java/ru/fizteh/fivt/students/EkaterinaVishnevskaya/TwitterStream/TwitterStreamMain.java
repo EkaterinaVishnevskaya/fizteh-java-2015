@@ -23,10 +23,10 @@ public class TwitterStreamMain {
             return;
         }
         if (parsed.isStream()) {
-            streamMode(parsed.isFilterRetweets(), parsed.getQueryWords());
+            streamMode(parsed.isFilterRetweets(), parsed.getQueryWord());
         }
         else{
-            limitedMode(parsed.isFilterRetweets(), parsed.getNumber(), parsed.getQueryWords());
+            limitedMode(parsed.isFilterRetweets(), parsed.getNumber(), parsed.getQueryWord());
         }
 
     }
@@ -89,14 +89,14 @@ public class TwitterStreamMain {
                         printTweet(System.out, tweet, true);
                         count++;
                         isAnyTweets = true;
-                        if (count==limit) break;
+                        if ((count==limit)&&(count!=-1)) break;
                 }
             }
             if (!isAnyTweets) {
                 System.out.println("\nНе найдено ни одного твита по запросу #" +
                         keyWord + ".\n");
             } else
-            if (count<limit){
+            if ((count<limit)&&(count!=-1)){
                 System.out.println("\nНайдено меньшее количество твитов по запросу #" +
                         keyWord + ".\n");
             }

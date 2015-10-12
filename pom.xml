@@ -22,30 +22,23 @@
     <modules>
         <module>egiby</module>
         <module>akormushin</module>
-<<<<<<< HEAD
         <module>mamaevads</module>
-=======
         <module>xmanatee</module>
         <module>mamaevads</module>
         <module>cache-nez</module>
->>>>>>> akormushin/master
         <module>ocksumoron</module>
         <module>zerts</module>
         <module>thefacetakt</module>
         <module>riazanovskiy</module>
         <module>andrewgark</module>
-<<<<<<< HEAD
-        <!--Add you module here-->
-    </modules>
-=======
         <module>fminkin</module>
         <module>sergmiller</module>
         <module>zakharovas</module>
         <module>zemen</module>
+        <module>preidman</module>
+        <module>EkaterinaVishnevskaya</module>
         <!--Add you module here-->
-    <module>preidman</module>
-  </modules>
->>>>>>> akormushin/master
+    </modules>
 
     <dependencies>
         <dependency>
@@ -125,9 +118,4 @@
         <tag>HEAD</tag>
     </scm>
 
-<<<<<<< HEAD
-
 </project>
-=======
-</project>
->>>>>>> akormushin/master

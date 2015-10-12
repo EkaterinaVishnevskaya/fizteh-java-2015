@@ -5,7 +5,7 @@ import com.beust.jcommander.Parameter;
 public class CommandParser{
     @Parameter(names = {"--query", "-q"},
             description = "Ключевые слова поиска.")
-    private String queryWords = null;
+    private String queryWord = null;
 
     @Parameter(names = {"--help", "-h"}, description = "Вывод справки.")
     private boolean help = false;
@@ -34,8 +34,8 @@ public class CommandParser{
     public boolean isLimit() {
         return (number != -1);
     }
-    public String getQueryWords() {
-        return queryWords;
+    public String getQueryWord() {
+        return queryWord;
     }
     public boolean isFilterRetweets() {
         return isFilter;
