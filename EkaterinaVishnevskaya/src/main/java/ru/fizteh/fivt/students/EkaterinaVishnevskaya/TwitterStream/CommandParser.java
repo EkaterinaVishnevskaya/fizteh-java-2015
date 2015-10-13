@@ -2,7 +2,7 @@ package ru.fizteh.fivt.students.EkaterinaVishnevskaya.TwitterStream;
 
 import com.beust.jcommander.Parameter;
 
-public class CommandParser{
+public class CommandParser {
     @Parameter(names = {"--query", "-q"},
             description = "Ключевые слова поиска.")
     private String queryWord = null;
@@ -18,17 +18,17 @@ public class CommandParser{
             description = "Фильтровать ретвиты.")
     private boolean isFilter = false;
 
-    @Parameter(names = {"--limit","-l"},
-            description = "Режим Limited: режим вывода только заданное количество твитов. Несовместим с режимом Stream")
+    @Parameter(names = {"--limit", "-l"},
+            description = "Режим Limited: вывод только заданного количества твитов. Несовместим с режимом Stream.")
     private int number = -1;
 
-    public boolean isHelpOn(){
+    public boolean isHelpOn() {
         return help;
     }
     public int getNumber() {
         return number;
     }
-    public boolean isStream(){
+    public boolean isStream() {
         return stream;
     }
     public boolean isLimit() {
