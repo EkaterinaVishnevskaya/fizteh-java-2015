@@ -15,8 +15,45 @@ public class Printing {
     private static final  String STANDART_COLOR = "\u001B[0m";
     private static final  String RT_COLOR = "\u001B[31m";
 
-    public static void printName(PrintStream out, String name) throws IOException {
+    public static void printTime(PrintStream out, LocalDateTime when)  throws IOException {
+        LocalDateTime currentTime = LocalDateTime.now();
+        long minute = ChronoUnit.MINUTES.between(when, currentTime);
+        long hour = ChronoUnit.HOURS.between(when, currentTime);
+        long day = ChronoUnit.DAYS.between(when, currentTime);
+        out.print(TIME_COLOR);
+        if (minute < 1) {
+            out.print("Только что ");
+        } else if (hour  < 1) {
+            out.print(minute + dislForm(minute, Printing.ETime.MINUTE) + " назад ");
+        } else if (day < 1) {
+            out.print(hour + dislForm(hour, Printing.ETime.HOUR) + " назад ");
+        } else {
+            if (day == 1) {
+                out.print("Вчера ");
+            } else {
+                out.print(day + dislForm(day, Printing.ETime.DAY) + " назад ");
+            }
+        }
+        out.print(STANDART_COLOR);
+    }
+
+    private static void printName(PrintStream out, String name) throws IOException {
         out.print(NAME_COLOR + "@" + name + STANDART_COLOR + ": ");
+    }
+
+    private static void printStatus(PrintStream out, String text, boolean rt, int rtCount)  throws IOException {
+        if (rt) {
+            out.print(RT_COLOR + " ретвитнул ");
+            String[] splited = text.split(" ");
+            printName(out, splited[1].split("@|:")[1]);
+            for (int i = 2; i < splited.length; ++i) {
+                out.println(splited[i]);
+            }
+            out.println();
+        } else {
+            out.println(text + " (" + rtCount + " "
+                + RETWEET_FORMS[getCorrectForm(rtCount).getType()] + ")");
+        }
     }
 
     public static void printTweet(PrintStream out, Status tweet, boolean time) throws IOException {
@@ -24,20 +61,7 @@ public class Printing {
             printTime(out, tweet.getCreatedAt().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
         }
         printName(out, tweet.getUser().getScreenName());
-        if (tweet.isRetweet()) {
-            out.print(RT_COLOR + " ретвитнул ");
-            String[] splited = tweet.getText().split(" ");
-            printName(out, splited[1].split("@|:")[1]);
-            for (int i = 2; i < splited.length; ++i) {
-                out.println(splited[i]);
-            }
-            out.println();
-        } else {
-            out.println(tweet.getText() + " (" + tweet.getRetweetCount() + " "
-                    + RETWEET_FORMS[getCorrectForm(tweet.getRetweetCount()).getType()] + ")");
-
-        }
-
+        printStatus(out, tweet.getText(), tweet.isRetweet(), tweet.getRetweetCount());
     }
 
     private static final int HUNDRED = 100;
@@ -82,28 +106,6 @@ public class Printing {
     }
 
     public static final int MILISEC_IN_SEC = 1000;
-
-    public static void printTime(PrintStream out, LocalDateTime when) {
-        LocalDateTime currentTime = LocalDateTime.now();
-        long minute = ChronoUnit.MINUTES.between(when, currentTime);
-        long hour = ChronoUnit.HOURS.between(when, currentTime);
-        long day = ChronoUnit.DAYS.between(when, currentTime);
-        out.print(TIME_COLOR);
-        if (minute < 1) {
-            out.print("Только что ");
-        } else if (hour  < 1) {
-            out.print(minute + dislForm(minute, Printing.ETime.MINUTE) + " назад ");
-        } else if (day < 1) {
-            out.print(hour + dislForm(hour, Printing.ETime.HOUR) + " назад ");
-        } else {
-            if (day == 1) {
-                out.print("Вчера");
-            } else {
-                out.print(day + dislForm(day, Printing.ETime.DAY) + " назад ");
-            }
-        }
-        out.print(STANDART_COLOR);
-    }
 
     public static String dislForm(long hours, ETime type) {
         ETime correctForm = getCorrectForm(hours);
