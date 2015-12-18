@@ -15,53 +15,59 @@ public class Printing {
     private static final  String STANDART_COLOR = "\u001B[0m";
     private static final  String RT_COLOR = "\u001B[31m";
 
-    public static void printTime(PrintStream out, LocalDateTime when)  throws IOException {
+    public static String formatTime(LocalDateTime when)  throws IOException {
+        String out = "";
         LocalDateTime currentTime = LocalDateTime.now();
         long minute = ChronoUnit.MINUTES.between(when, currentTime);
         long hour = ChronoUnit.HOURS.between(when, currentTime);
         long day = ChronoUnit.DAYS.between(when, currentTime);
-        out.print(TIME_COLOR);
+        out = out + TIME_COLOR;
         if (minute < 1) {
-            out.print("Только что ");
+            out = out + "Только что ";
         } else if (hour  < 1) {
-            out.print(minute + dislForm(minute, Printing.ETime.MINUTE) + " назад ");
+            out = out + minute + dislForm(minute, Printing.ETime.MINUTE) + " назад ";
         } else if (day < 1) {
-            out.print(hour + dislForm(hour, Printing.ETime.HOUR) + " назад ");
+            out = out + hour + dislForm(hour, Printing.ETime.HOUR) + " назад ";
         } else {
             if (day == 1) {
-                out.print("Вчера ");
+                out = out + "Вчера ";
             } else {
-                out.print(day + dislForm(day, Printing.ETime.DAY) + " назад ");
+                out = out + day + dislForm(day, Printing.ETime.DAY) + " назад ";
             }
         }
-        out.print(STANDART_COLOR);
+        out = out + STANDART_COLOR;
+        return out;
     }
 
-    private static void printName(PrintStream out, String name) throws IOException {
-        out.print(NAME_COLOR + "@" + name + STANDART_COLOR + ": ");
+    private static String formatName(String name) throws IOException {
+        String out = "";
+        out = out + NAME_COLOR + "@" + name + STANDART_COLOR + ": ";
+        return out;
     }
 
-    private static void printStatus(PrintStream out, String text, boolean rt, int rtCount)  throws IOException {
+    private static String formatStatus(String text, boolean rt, int rtCount)  throws IOException {
+        String out = "";
         if (rt) {
-            out.print(RT_COLOR + " ретвитнул ");
+            out = out + RT_COLOR + " ретвитнул ";
             String[] splited = text.split(" ");
-            printName(out, splited[1].split("@|:")[1]);
+            out = out + formatName(splited[1].split("@|:")[1]);
             for (int i = 2; i < splited.length; ++i) {
-                out.println(splited[i]);
+                out = out + splited[i] + "\n";
             }
-            out.println();
+            out = out + "\n";
         } else {
-            out.println(text + " (" + rtCount + " "
-                + RETWEET_FORMS[getCorrectForm(rtCount).getType()] + ")");
+            out = out + (text + " (" + rtCount + " "
+                + RETWEET_FORMS[getCorrectForm(rtCount).getType()] + ")\n");
         }
+        return out;
     }
 
     public static void printTweet(PrintStream out, Status tweet, boolean time) throws IOException {
         if (time) {
-            printTime(out, tweet.getCreatedAt().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
+            out.print(formatTime(tweet.getCreatedAt().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()));
         }
-        printName(out, tweet.getUser().getScreenName());
-        printStatus(out, tweet.getText(), tweet.isRetweet(), tweet.getRetweetCount());
+        out.print(formatName(tweet.getUser().getScreenName()));
+        out.print(formatStatus(tweet.getText(), tweet.isRetweet(), tweet.getRetweetCount()));
     }
 
     private static final int HUNDRED = 100;
