@@ -1,4 +1,4 @@
-package thread;
+package ru.fizteh.fivt.students.EkaterinaVishnevskaya.thread;
 
 import javax.naming.LimitExceededException;
 import java.util.ArrayList;

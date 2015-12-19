@@ -1,11 +1,9 @@
-package ru.fizteh.fivt.students.popova.CollectionQl2;
+package ru.fizteh.fivt.students.EkaterinaVishnevskaya.CollectionQl2;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-/**
- * Created by V on 19.12.2015.
- */
+
 public class CollectionsQL {
 
     /**

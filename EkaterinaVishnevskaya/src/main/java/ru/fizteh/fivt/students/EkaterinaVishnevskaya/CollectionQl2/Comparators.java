@@ -1,4 +1,4 @@
-package ru.fizteh.fivt.students.popova.CollectionQl2;
+package ru.fizteh.fivt.students.EkaterinaVishnevskaya.CollectionQl2;
 
 import java.util.Comparator;
 import java.util.function.Function;

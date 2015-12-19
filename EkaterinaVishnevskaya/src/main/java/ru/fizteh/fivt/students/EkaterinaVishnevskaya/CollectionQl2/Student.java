@@ -1,4 +1,4 @@
-package ru.fizteh.fivt.students.popova.CollectionQl2;
+package ru.fizteh.fivt.students.EkaterinaVishnevskaya.CollectionQl2;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -6,9 +6,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
-/**
- * Created by V on 19.12.2015.
- */
 public class Student {
     private final String name;
 

@@ -1,4 +1,4 @@
-package ru.fizteh.fivt.students.popova.CollectionQl2;
+package ru.fizteh.fivt.students.EkaterinaVishnevskaya.CollectionQl2;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
@@ -93,7 +93,7 @@ import java.util.stream.Stream;
             return this;
         }
 
-        //на самом деле должно быть Iterable<Statistics>
+        //пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ Iterable<Statistics>
         public<ResultType> Iterable<ResultType> execute()
         {
             for( Runnable r : actionsForInput)
